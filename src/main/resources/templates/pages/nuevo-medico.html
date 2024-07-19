@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantilla}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="espaciocontenidohtml">
+    <div class="page-header">
+        <h3 class="page-title">Crear Medico</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Default form</h4>
+                    <p class="card-description"> Basic form layout </p>
+                    <form th:action="@{/guardar-medico}" th:object="${nuevo}" role="form" method="post" class="forms-sample">
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Nombres</label>
+                            <input th:field="*{nombreMedico}" type="text" class="form-control" id="exampleInputUsername1" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Apellidos</label>
+                            <input th:field="*{apellidoMedico}" type="text" class="form-control"  placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Cedula</label>
+                            <input th:field="*{cedulaMedico}" type="text" class="form-control" id="" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Telefono</label>
+                            <input th:field="*{telefonoMedico}" type="text" class="form-control" id="" placeholder="">
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6 col-12 mt-lg-0 mt-2">
+                            <label for="departamento">Departamento</label>
+                            <select  name="departamento" class="btn bg-gradient-light w-50 mb-0 toast-btn" aria-label="Roles de usuario">
+                                <option  th:each="datos: ${departamentos}"
+                                         th:value="${datos.idDepartamento}"
+                                         th:text="${datos.nombreDepartamento}"
+                                         th:selected="${datos.idDepartamento == nuevo.departamento?.idDepartamento}"></option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input th:field="*{estado}" type="checkbox" class="form-check-input"> Estado</label>
+                        </div>
+                        <input type="hidden" th:field="*{idMedico}" >
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
